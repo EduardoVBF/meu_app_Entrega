@@ -25,7 +25,13 @@ jobs:
       - name: Build and push Docker image
         shell: powershell
         run: |
-          docker build -t ${{ secrets.DOCKER_USERNAME }}/meu_app:${{ github.sha }} .
+          # Mudar para containers Windows
+          & $Env:ProgramFiles\Docker\Docker\DockerCli.exe -SwitchDaemon
+
+          # Aguardar Docker reiniciar
+          Start-Sleep -Seconds 10
+
+          docker build --isolation=hyperv -t ${{ secrets.DOCKER_USERNAME }}/meu_app:${{ github.sha }} .
           docker push ${{ secrets.DOCKER_USERNAME }}/meu_app:${{ github.sha }}
 
       - name: Deploy via PowerShell
