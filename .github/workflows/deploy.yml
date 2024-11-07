@@ -38,4 +38,4 @@ jobs:
             docker pull ${{ secrets.DOCKER_USERNAME }}/meu_app:${{ github.sha }}
             docker stop meu_app || true
             docker rm meu_app || true
-            docker run -d -p ${{ secrets.SSH_PORT }}:8080 --name meu_app ${{ secrets.DOCKER_USERNAME }}/meu_app:${{ github.sha }}
+            docker run -d -p ${{ secrets.SSH_PORT }}:8088 --name meu_app ${{ secrets.DOCKER_USERNAME }}/meu_app:${{ github.sha }}
